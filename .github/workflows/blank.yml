@@ -6,19 +6,25 @@ jobs:
   build:
       name: pday
       runs-on: ubuntu-latest
-      env:
-        ACCEPT_EULA: "Y"
-        MSSQL_SA_PASSWORD: "ProgrammersDay"
       container:
         image: mcr.microsoft.com/mssql/server:2022-latest
+        env:
+          ACCEPT_EULA: "Y"
+          MSSQL_SA_PASSWORD: "ProgrammersDay"
+          MSSQL_PID: Express
       services:
         sql:
           image: mcr.microsoft.com/mssql/server:2022-latest
           ports:
             - 1433:1433
-
+          options: >-
+            --health-cmd="/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "ProgrammersDay" -Q 'SELECT 1' || exit 1"
+            --health-interval=10s
+            --health-timeout=5s
+            --health-retries=5
+            --health-start-period=10s
       steps:
       - name: say hello
         run: |
-          /opt/mssql-tools18/bin/sqlcmd -S sql -U sa -P "ProgrammersDay" -d master -Q "SELECT DATEADD(DAY, 256, '2023-12-31')"
+          /opt/mssql-tools/bin/sqlcmd -S sql -U sa -P "ProgrammersDay" -d master -Q "SELECT DATEADD(DAY, 256, '2023-12-31')"
       
