@@ -8,13 +8,13 @@ jobs:
       runs-on: ubuntu-latest
       container:
         image: mcr.microsoft.com/mssql/server:2022-latest
-        env:
-          ACCEPT_EULA: "Y"
-          MSSQL_SA_PASSWORD: "ProgrammersDay"
-          MSSQL_PID: Express
       services:
         sql:
           image: mcr.microsoft.com/mssql/server:2022-latest
+          env:
+            ACCEPT_EULA: "Y"
+            MSSQL_SA_PASSWORD: "ProgrammersDay"
+            MSSQL_PID: Express
           ports:
             - 1433:1433
           options: >-
@@ -22,7 +22,7 @@ jobs:
             --health-interval=10s
             --health-timeout=5s
             --health-retries=5
-            --health-start-period=60s
+            --health-start-period=10s
       steps:
       - name: say hello
         run: |
