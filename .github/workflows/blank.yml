@@ -13,12 +13,12 @@ jobs:
           image: mcr.microsoft.com/mssql/server:2022-latest
           env:
             ACCEPT_EULA: "Y"
-            MSSQL_SA_PASSWORD: "ProgrammersDay"
+            MSSQL_SA_PASSWORD: "ProgrammersDay1%"
             MSSQL_PID: Express
           ports:
             - 1433:1433
           options: >-
-            --health-cmd="/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "ProgrammersDay" -Q 'SELECT 1' || exit 1"
+            --health-cmd="/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "ProgrammersDay1%" -Q 'SELECT 1' || exit 1"
             --health-interval=10s
             --health-timeout=5s
             --health-retries=5
@@ -26,5 +26,5 @@ jobs:
       steps:
       - name: say hello
         run: |
-          /opt/mssql-tools/bin/sqlcmd -S sql -U sa -P "ProgrammersDay" -d master -Q "SELECT DATEADD(DAY, 256, '2023-12-31')"
+          /opt/mssql-tools/bin/sqlcmd -S sql -U sa -P "ProgrammersDay1%" -d master -Q "SELECT DATEADD(DAY, 256, '2023-12-31')"
       
