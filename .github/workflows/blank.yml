@@ -20,5 +20,5 @@ jobs:
       steps:
       - name: say hello
         run: |
-          /opt/mssql-tools18/bin/sqlcmd -S 127.0.0.1 -U sa -P "ProgrammersDay" -d master -Q "SELECT DATEADD(DAY, 256, '2023-12-31')"
+          /opt/mssql-tools18/bin/sqlcmd -S sql -U sa -P "ProgrammersDay" -d master -Q "SELECT DATEADD(DAY, 256, '2023-12-31')"
       
